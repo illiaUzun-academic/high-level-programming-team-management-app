@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="card-body">
+        <h4>Team List</h4>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for team in teams %}
+                <tr>
+                    <td>{{ team.name }}</td>
+                    <td>{{ team.location }}</td>
+                    <td><a type="button" class="btn btn-warning" href="/team-update/{{ team.team_id }}">Update</a>
+                        <a type="button" class="btn btn-danger" href="/team-delete/{{ team.team_id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a type="button" class="btn btn-success" href="{% url 'team-create' %}">Create</a>
+    </div>
+{% endblock %}
