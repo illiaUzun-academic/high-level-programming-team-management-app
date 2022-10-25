@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="card-body">
+        <h4>Update Employee</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a type="button" class="btn btn-danger" href="/team-view/{{ team_id }}">Cancel</a>
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+    </div>
+{% endblock %}

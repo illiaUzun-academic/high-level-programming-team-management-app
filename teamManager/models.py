@@ -1,12 +1,14 @@
-from mongoengine import StringField, Document
+from mongoengine import StringField, Document, IntField
 
 
-# Create your models here.
 class Team(Document):
     name = StringField()
     office_location = StringField()
 
 
-class Worker(Document):
+class Employee(Document):
+    team_id = StringField()
     name = StringField()
     surname = StringField()
+    salary = IntField()
+    tenure = IntField()

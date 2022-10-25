@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="card-body">
+        <div class="col-xs-12 text-center">
+            <h4>Team {{ team_name }}</h4>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Tenure</th>
+                <th scope="col">Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.surname }}</td>
+                    <td>{{ employee.tenure }}</td>
+                    <td>{{ employee.salary }}</td>
+                    <td>
+                        <a type="button" class="btn btn-warning" href="/employee-update/{{ employee.employee_id }}">Update</a>
+                        <a type="button" class="btn btn-danger" href="/employee-delete/{{ employee.employee_id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a type="button" class="btn btn-success" href="/employee-create/{{ team_id }}">Create</a>
+    </div>
+    <div class="col-xs-12 text-center">
+        <h2>Project Management Triangle</h2>
+    </div>
+    <div class="col-xs-12 text-center">
+        <img src="data:image/png;base64, {{ chart_base64 }}" alt="Pie Chart"/>
+    </div>
+{% endblock %}
