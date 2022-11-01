@@ -2,6 +2,7 @@ import base64
 import io
 
 import matplotlib.pyplot as plt
+import openpyxl
 from django.shortcuts import render, redirect
 
 from teamManager.dtos import TeamDTO, EmployeeDTO
@@ -132,6 +133,24 @@ def employee_create(request, team_id):
     else:
         form = EmployeeForm()
     return render(request, 'employee-create.html', {'form': form, 'team_id': team_id})
+
+
+def employee_upload(request, team_id):
+    if request.method == "POST":
+        employee_list = request.FILES.get("employee_list")
+        workbook = openpyxl.load_workbook(employee_list)
+        worksheet = workbook["Employees"]
+
+        for row in worksheet.iter_rows(min_row=2, values_only=True):
+            employee = Employee()
+            employee.team_id = team_id
+            employee.name = row[0]
+            employee.surname = row[1]
+            employee.tenure = row[2]
+            employee.salary = row[3]
+            employee.save()
+
+    return redirect('/team-view/' + team_id)
 
 
 def employee_update(request, employee_id):

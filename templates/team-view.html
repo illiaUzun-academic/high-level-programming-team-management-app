@@ -30,6 +30,14 @@
         </table>
         <a type="button" class="btn btn-success" href="/employee-create/{{ team_id }}">Create</a>
     </div>
+    <div class="card-body">
+        <form action="/employee-upload/{{ team_id }}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" class="form-control" name="employee_list">
+            <br>
+            <input type="submit" value="Upload" class="btn btn-success">
+        </form>
+    </div>
     <div class="col-xs-12 text-center">
         <h2>Project Management Triangle</h2>
     </div>
